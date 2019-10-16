@@ -23,7 +23,8 @@ class PixelValuesRecorder:
     def screenShot(self):
         self.screen = PIL.ImageGrab.grab().load()
 
-    def getArraySize(self, width: int, height: int, step: int):
+    @staticmethod
+    def getArraySize(width: int, height: int, step: int):
         xSize = int(width / step)
         ySize = int(height / step)
         return xSize, ySize
