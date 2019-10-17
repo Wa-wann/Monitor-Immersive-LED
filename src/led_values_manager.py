@@ -1,8 +1,8 @@
 import numpy as np
 
-from src.led_values_sender import LedValuesSender
-from src.pixel_values_recorder import PixelValuesRecorder
-from src.position import Position
+from led_values_sender import LedValuesSender
+from pixel_values_recorder import PixelValuesRecorder
+from position import Position
 
 
 class LedValuesManager:

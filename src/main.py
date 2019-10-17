@@ -1,4 +1,4 @@
-from src.led_values_manager import LedValuesManager
+from led_values_manager import LedValuesManager
 
 
 def main():

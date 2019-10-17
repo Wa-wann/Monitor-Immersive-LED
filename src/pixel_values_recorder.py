@@ -2,7 +2,7 @@ import PIL
 from PIL import ImageGrab
 import numpy as np
 
-from src.position import Position
+from position import Position
 
 
 class PixelValuesRecorder:
