@@ -51,10 +51,10 @@ class LedValuesManager:
             if readText == b"\x00":
                 self.pixelValuesRecorder.screenShot()
 
-                leftMeans = self.computeMeanStripLedValue(Position.left)
+                leftMeans = np.flip(self.computeMeanStripLedValue(Position.left), axis=0)
                 topMeans = self.computeMeanStripLedValue(Position.top)
                 rightMeans = self.computeMeanStripLedValue(Position.right)
-                bottomMeans = self.computeMeanStripLedValue(Position.bottom)
+                bottomMeans = np.flip(self.computeMeanStripLedValue(Position.bottom), axis=0)
 
                 ledStringValues = self.getAllStringValues(leftMeans, topMeans, rightMeans, bottomMeans)
                 self.ledValuesSender.sendLedValues(ledStringValues)
