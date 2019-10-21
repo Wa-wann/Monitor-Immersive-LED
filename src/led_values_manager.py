@@ -7,7 +7,7 @@ from position import Position
 
 class LedValuesManager:
     def __init__(self, screenWidth: int, screenHeight: int, nWidthLed: int, nHeightLed: int, arduinoPath: str = 'COM5',
-                 arrayDepth: int = 100, precision: int = 5, bitrate: int = 19200, timeout: int = 1):
+                 arrayDepth: int = 100, precision: int = 5, bitrate: int = 500000, timeout: int = 1):          
         self.pixelValuesRecorder = PixelValuesRecorder(screenWidth, screenHeight, nWidthLed, nHeightLed, arrayDepth)
         self.ledValuesSender = LedValuesSender(arduinoPath, bitrate, timeout)
         self.precision = precision
@@ -48,7 +48,9 @@ class LedValuesManager:
     def run(self):
         while self.isRunning:
             readText = self.ledValuesSender.read()
+            #print(readText)
             if readText == b"\x00":
+                #print("envoi")
                 self.pixelValuesRecorder.screenShot()
 
                 leftMeans = np.flip(self.computeMeanStripLedValue(Position.left), axis=0)
@@ -59,29 +61,12 @@ class LedValuesManager:
                 ledStringValues = self.getAllStringValues(leftMeans, topMeans, rightMeans, bottomMeans)
                 self.ledValuesSender.sendLedValues(ledStringValues)
 
-    def getStringValue(self, array: np.ndarray, position: Position):
-        ledStringValue = ""
-        if position == Position.left:
-            ledStringValue = f"$A"
-
-        elif position == Position.top:
-            ledStringValue = f"$B"
-
-        elif position == Position.right:
-            ledStringValue = f"$C"
-
-        elif position == Position.bottom:
-            ledStringValue = f"$D"
-
-        ledStringValue = f"{ledStringValue}{self.getPixelsStringValues(array)}"
-        return ledStringValue
-
     def getAllStringValues(self, leftMeans: np.ndarray, topMeans: np.ndarray, rightMeans: np.ndarray,
                            bottomMeans: np.ndarray):
-        s1 = self.getStringValue(leftMeans, Position.left)
-        s2 = self.getStringValue(topMeans, Position.top)
-        s3 = self.getStringValue(rightMeans, Position.right)
-        s4 = self.getStringValue(bottomMeans, Position.bottom)
+        s1 = self.getStringValues(leftMeans)
+        s2 = self.getStringValues(topMeans)
+        s3 = self.getStringValues(rightMeans)
+        s4 = self.getStringValues(bottomMeans)
         StringValues = np.array([s1, s2, s3, s4], dtype=object)
         return StringValues
 
@@ -89,8 +74,9 @@ class LedValuesManager:
     def getPixelStringValue(r: int, g: int, b: int):
         return f"${r},{g},{b},"
 
-    def getPixelsStringValues(self, meanLedArray: np.ndarray):
+    def getStringValues(self, meanLedArray: np.ndarray):
         tempString = ""
         for i in range(len(meanLedArray)):
             tempString = f"{tempString}{self.getPixelStringValue(meanLedArray[i][0], meanLedArray[i][1], meanLedArray[i][2])}"
+        tempString += "$"
         return tempString
