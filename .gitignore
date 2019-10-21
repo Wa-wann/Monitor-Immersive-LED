@@ -1,2 +1,6 @@
 venv/
 .cache/
+src/__pycache__/
+build/
+dist/
+.vscode/
