@@ -23,4 +23,5 @@ This is our shame and you will probably find much better way to do it. For the s
 
 I wish you good luck in your quest to make it, you will be happy with it I garante it.
   
+ If you want to see what it can look like I made a video to present our project :  https://youtu.be/EEjXXsQKmLc 
   
