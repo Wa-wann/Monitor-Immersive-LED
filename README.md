@@ -1,6 +1,6 @@
 # Monitor-Immersive-LED
 
-Welcome in the wonderfull world of immersion for PC user. This Monitor immersive LED project will make you go inside your game, movie or if you like it as much as I do fireplace background.
+Welcome to wonderful world of immersion for PC users. This Monitor immersive LED project will make you dive into your games, movies or if you like it as much as I do fireplace backgrounds.
 
 We make a device that will catch colors display on your monitor and will project them, thank to LED behind it. This faithfully reproduces all around the monitor the colors there is on your screen. So all the wall behind your monitor will become the extension of your screen.
 
